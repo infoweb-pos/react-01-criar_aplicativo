@@ -33,7 +33,7 @@ Antes de começar, certifique-se de que você possui:
 | Requisito | Descrição |
 |-----------|-----------|
 | **Conta GitHub** | Necessária para criar repositório e usar o Codespace. Crie gratuitamente em [github.com](https://github.com/signup). |
-| **Navegador moderno** | Chrome, Edge, Firefox ou Safari atualizado. O Codespace roda 100% no navegador. |
+| **Navegador moderno** | **Chrome**, Edge, Firefox ou Safari atualizado. O Codespace roda 100% no navegador. |
 | **Conhecimentos básicos** | HTML, CSS, JavaScript e noções de terminal/linha de comando. |
 
 > 💡 **Dica:** Não é necessário instalar nada na sua máquina. O GitHub Codespace fornece um ambiente de desenvolvimento completo na nuvem com Node.js, npm e todas as ferramentas necessárias.
@@ -47,10 +47,10 @@ Antes de começar, certifique-se de que você possui:
 2. Clique no botão **"New"** (ou acesse diretamente [github.com/new](https://github.com/new)).
 
 3. Preencha as informações do repositório:
-   - **Repository name:** `meu-app-react` (ou o nome que preferir)
+   - **Repository name:** `meu-app-front` (ou o nome que preferir)
    - **Description:** `Aplicativo web React com Next.js` (opcional)
-   - **Visibility:** `Public` ou `Private`
-   - ✅ Marque **"Add a README file"**
+   - **Visibility:** `Public`
+   - ✅ Desmarque **"Add a README file"**
 
 4. Clique em **"Create repository"**.
 
@@ -90,130 +90,102 @@ No terminal do Codespace, execute:
 npx create-next-app@latest .
 ```
 
-> O `.` indica que o app será criado na raiz do repositório atual. Se preferir criar em um subdiretório, substitua `.` pelo nome da pasta, por exemplo `npx create-next-app@latest meu-app`.
+> O `.` indica que o app será criado na raiz do repositório atual.
+
 
 ### 4.2 Opções de configuração
 
 O assistente interativo fará uma série de perguntas. Responda conforme abaixo:
 
-```
-What is your project named? › my-app
-Would you like to use TypeScript? › Yes
-Would you like to use ESLint? › No
-Would you like to use Tailwind CSS? › Yes
-Would you like your code inside a `src/` directory? › Yes
-Would you like to use App Router? (recommended) › Yes
-Would you like to use Turbopack for next dev? › Yes
-Would you like to customize the import alias (@/* by default)? › Yes
-What import alias would you like configured? › @/*
+> Provável que apareça a pergunta abaixo.
+> Responda que sim digitando a tecla `y` seguido de `ENTER`. 
+> O aplicativo `npx` esta solicitando baixar a última versão do script `create-next-app`.
+
+```bash
+Need to install the following packages:
+create-next-app@16.1.6
+Ok to proceed? (y)
+
 ```
 
-| Opção | Escolha | Motivo |
-|-------|---------|--------|
-| **TypeScript** | `Yes` | Tipagem estática melhora a qualidade do código. |
-| **ESLint** | `No` | Será substituído pelo **Biome**, que faz lint e formatação em um único pacote. |
-| **Tailwind CSS** | `Yes` | Framework CSS utilitário, muito produtivo para estilização. |
-| **`src/` directory** | `Yes` | Organiza o código-fonte separado dos arquivos de configuração. |
-| **App Router** | `Yes` | Roteamento moderno do Next.js com suporte a Server Components. |
-| **Turbopack** | `Yes` | Bundler incrementalmente mais rápido que o Webpack, integrado ao Next.js. |
-| **Import alias** | `@/*` | Permite importar com `@/components/...` em vez de `../../components/...`. |
+> Próxima pergunta, o `create-next-app` sugere criar um projeto com as configurações padronizadas.
+> Usando a seta para baixo, selecione `No, customize settings - Choose your own preferences` e pressione `ENTER`.
+> Fazendo isso vamos configurar nosso projeto com nossas necessidades.
+
+```bash
+Need to install the following packages:
+create-next-app@16.1.6
+Ok to proceed? (y)
+
+? Would you like to use the recommended Next.js defaults? › - Use arrow-keys. Return to submit.
+    Yes, use recommended defaults
+❯   No, customize settings - Choose your own preferences
+
+```
+
+> A medida que as perguntas são respondidas, o `create-next-app` vai fazendo o cheque com o caractere `✔` e adicionando nova pergunta com o `?`, conforme terminal abaixo.
+> Para a pergunta de uso do `Typescript`, responda `Yes` usando ou a seta pro lado ou digitando `y` seguido de um `ENTER`.
+
+```
+Need to install the following packages:
+create-next-app@16.1.6
+Ok to proceed? (y) y
+
+✔ Would you like to use the recommended Next.js defaults? › No, customize settings
+? Would you like to use TypeScript? › No / Yes
+
+```
+
+> O terminal abaixo mostra as perguntas e respostas.
+> A tabela abaixo segue com as explicações das respostas.
+
+```bash
+Need to install the following packages:
+create-next-app@16.1.6
+Ok to proceed? (y) y
+
+✔ Would you like to use the recommended Next.js defaults? › No, customize settings
+✔ Would you like to use TypeScript? … Yes
+✔ Which linter would you like to use? › Biome
+✔ Would you like to use React Compiler? … Yes
+✔ Would you like to use Tailwind CSS? …  Yes
+✔ Would you like your code inside a `src/` directory? … Yes
+✔ Would you like to use App Router? (recommended) … Yes
+✔ Would you like to customize the import alias (`@/*` by default)? … Yes
+✔ What import alias would you like configured? … @/*
+
+```
+| Opção                    | Escolha | Motivo |
+|--------------------------|---------|--------|
+| **TypeScript**           | `Yes`   | Tipagem estática melhora a qualidade do código. |
+| **linter**.              | `No`    | Será utilizado o **Biome**, que faz lint e formatação em um único pacote. |
+| **React Compiler**       | `Yes`   | |
+| **Tailwind CSS**         | `Yes`   | Framework CSS utilitário, muito produtivo para estilização. |
+| **`src/`**               | `Yes`   | Organiza o código-fonte separado dos arquivos de configuração. |
+| **App Router**           | `Yes`   | Roteamento moderno do Next.js com suporte a Server Components. |
+| **customize the import** | `Yes`   | Permite definir _alias_ para utilizar nas importações. | 
+| **Import alias**         | `@/*`   | Permite importar com `@/components/...` em vez de `../../components/...`. |
 
 Aguarde a instalação das dependências. Ao final, você verá:
 
 ```
-✔ Success! Created my-app
+✔ Success! Created meu-app-front at /workspaces/meu-app-front
 ```
 
 ---
 
-## 5. Configurar o Biome
+## 5. Biome
 
-O [Biome](https://biomejs.dev/) é uma ferramenta de **lint e formatação** para JavaScript/TypeScript extremamente rápida, escrita em Rust. Ele substitui ESLint + Prettier com uma única dependência.
+O [Biome](https://biomejs.dev/) é uma ferramenta de **lint e formatação** para JavaScript/TypeScript extremamente rápida, escrita em Rust.
+Ele substitui ESLint + Prettier com uma única dependência.
 
-### 5.1 Instalar o Biome
+O biome já vem instalado e configurado para nosso projeto.
+Para detalhes sobre a configuração do biome, ver o arquivo `biome.json` na raiz do projeto e consultar o docs no site do projeto.
 
-```bash
-npm install --save-dev --save-exact @biomejs/biome
-```
-
-### 5.2 Configurar o `biome.json`
-
-Inicialize o arquivo de configuração:
-
-```bash
-npx @biomejs/biome init
-```
-
-Isso gera o arquivo `biome.json` na raiz do projeto. Edite-o com as configurações abaixo:
-
-```json
-{
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "vcs": {
-    "enabled": true,
-    "clientKind": "git",
-    "useIgnoreFile": true
-  },
-  "files": {
-    "ignoreUnknown": false,
-    "ignore": [
-      "node_modules",
-      ".next",
-      "dist"
-    ]
-  },
-  "formatter": {
-    "enabled": true,
-    "indentStyle": "space",
-    "indentWidth": 2,
-    "lineWidth": 100
-  },
-  "organizeImports": {
-    "enabled": true
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true
-    }
-  },
-  "javascript": {
-    "formatter": {
-      "quoteStyle": "double",
-      "jsxQuoteStyle": "double",
-      "semicolons": "asNeeded",
-      "trailingCommas": "es5"
-    }
-  }
-}
-```
-
-### 5.3 Adicionar scripts no `package.json`
-
-Abra o arquivo `package.json` e adicione os scripts de lint e formatação dentro da chave `"scripts"`:
-
-```json
-{
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "biome lint --write .",
-    "format": "biome format --write .",
-    "check": "biome check --write ."
-  }
-}
-```
-
-> 💡 O comando `check` executa lint + formatação + organização de imports em uma única chamada.
-
-### 5.4 Remover ESLint
-
-Como optamos por não usar ESLint no passo de criação, o `create-next-app` não o instalou. Confirme que não existem arquivos como `.eslintrc.*` ou `eslint.config.*` no projeto. Se existirem, remova-os:
-
-```bash
-rm -f .eslintrc.json .eslintrc.js .eslintrc.cjs eslint.config.js eslint.config.mjs
-```
+O biome também já esta pronto para ser executado via linha de comando:
+- `npm run check` : Executa a formatação, linter e ordenação das importações.
+- `npm run lint` : Executa verificações nos códigos-fontes.
+- `npm run format` : Executa a formatação dos códigos-fonte.
 
 ---
 
@@ -221,32 +193,7 @@ rm -f .eslintrc.json .eslintrc.js .eslintrc.cjs eslint.config.js eslint.config.m
 
 O [React Compiler](https://react.dev/learn/react-compiler) (anteriormente chamado de "React Forget") é uma ferramenta experimental que **otimiza automaticamente** componentes React, eliminando a necessidade de `useMemo`, `useCallback` e `React.memo` na maioria dos casos.
 
-### 6.1 Instalar as dependências
-
-```bash
-npm install --save-dev babel-plugin-react-compiler@experimental
-npm install react@experimental react-dom@experimental
-```
-
-> ⚠️ **Atenção:** As versões `@experimental` incluem as APIs mais recentes necessárias para o React Compiler. Em produção, avalie se prefere aguardar o lançamento estável.
-
-### 6.2 Ativar no `next.config.ts`
-
-Abra o arquivo `next.config.ts` e configure o React Compiler:
-
-```typescript
-import type { NextConfig } from "next"
-
-const nextConfig: NextConfig = {
-  experimental: {
-    reactCompiler: true,
-  },
-}
-
-export default nextConfig
-```
-
-Verifique se o compilador está funcionando executando o build:
+Para Verificar se o compilador está funcionando, execute o _build_:
 
 ```bash
 npm run build
@@ -270,7 +217,7 @@ meu-app/
 ├── next-env.d.ts                # Tipos TypeScript gerados pelo Next.js
 ├── node_modules/                # Dependências instaladas (não commitar)
 ├── package.json                 # Metadados e dependências do projeto
-├── package-lock.json            # Lock file das dependências exatas
+├── package-lock.json            # Lock file das dependências exatas (gerado automaticamente, não commitar)
 ├── postcss.config.mjs           # Configuração do PostCSS (usado pelo Tailwind)
 ├── public/                      # Arquivos estáticos públicos (imagens, fontes, ícones)
 │   ├── file.svg
@@ -278,7 +225,7 @@ meu-app/
 │   ├── next.svg
 │   ├── vercel.svg
 │   └── window.svg
-├── README.md                    # Documentação do projeto
+├── README.md                    # Documentação do projeto (devemos sempre atualizar as inf daqui)
 ├── src/                         # Código-fonte da aplicação
 │   └── app/                     # Diretório do App Router
 │       ├── favicon.ico          # Ícone da aba do navegador
@@ -290,18 +237,18 @@ meu-app/
 
 ### Descrição dos principais arquivos e diretórios
 
-| Caminho | Descrição |
-|---------|-----------|
-| `src/app/` | Contém todas as rotas e layouts da aplicação (App Router). Cada pasta cria uma rota. |
-| `src/app/layout.tsx` | Layout raiz: define as tags `<html>` e `<body>`, fontes globais e metadados padrão. Envolve todas as páginas. |
-| `src/app/page.tsx` | Componente da rota raiz (`/`). É o que aparece ao acessar `http://localhost:3000`. |
+| Caminho               | Descrição |
+|-----------------------|-----------|
+| `public/`.            | Arquivos servidos estaticamente. Um arquivo `public/logo.png` fica acessível em `http://localhost:3000/logo.png`. |
+| `src/app/`            | Contém todas as rotas e layouts da aplicação (App Router). Cada pasta cria uma rota. |
+| `src/app/layout.tsx`  | Layout raiz: define as tags `<html>` e `<body>`, fontes globais e metadados padrão. Envolve todas as páginas. |
+| `src/app/page.tsx`    | Componente da rota raiz (`/`). É o que aparece ao acessar `http://localhost:3000`. |
 | `src/app/globals.css` | Estilos globais. Contém as diretivas `@tailwind base`, `@tailwind components` e `@tailwind utilities`. |
-| `public/` | Arquivos servidos estaticamente. Um arquivo `public/logo.png` fica acessível em `http://localhost:3000/logo.png`. |
-| `next.config.ts` | Configurações avançadas do Next.js: variáveis de ambiente, redirects, headers, React Compiler, etc. |
-| `tsconfig.json` | Configuração do TypeScript. Define o alias `@/*` mapeado para `./src/*`. |
-| `biome.json` | Configuração unificada de lint e formatação de código (substitui ESLint + Prettier). |
+| `biome.json`          | Configuração unificada de lint e formatação de código (substitui ESLint + Prettier). |
+| `next.config.ts`      | Configurações avançadas do Next.js: variáveis de ambiente, redirects, headers, React Compiler, etc. |
+| `package.json`       | Lista de dependências e scripts do projeto (`dev`, `build`, `start`, `lint`, `format`). |
 | `postcss.config.mjs` | Necessário para o Tailwind CSS processar as classes utilitárias. |
-| `package.json` | Lista de dependências e scripts do projeto (`dev`, `build`, `start`, `lint`, `format`). |
+| `tsconfig.json`       | Configuração do TypeScript. Define o alias `@/*` mapeado para `./src/*`. |
 
 ### Como o App Router funciona
 
@@ -357,7 +304,28 @@ import { Button } from "@/components/ui/Button"
 npm run dev
 ```
 
-Acesse [http://localhost:3000](http://localhost:3000) no navegador. O servidor recarrega automaticamente ao salvar arquivos.
+> A saída esperada será como terminal abaixo.
+
+```bash
+> meu_app-front@0.1.0 dev
+> next dev
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://10.0.11.47:3000
+
+✓ Starting...
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+✓ Ready in 1010ms
+```
+
+Apesar do Next/React abrir a porta 3000 com o endereço `localhost:3000`, lembre que você esta no code space que é uma máquina virtual num servidor na infraestrutura do github.
+O code space verifica que você abriu uma porta no computador virtual e pergunta se você deseja abrir o endereço no navegador.
+Responda que `abrir no navegador` e ele deverá abrir uma nova aba com um endereço estranho, no meu computador / repositório no momento deste tutorial foi o endereço `https://ideal-xylophone-pj7jp57rvrh75-3000.app.github.dev/`.
 
 > 💡 No Codespace, ao iniciar o servidor de desenvolvimento, o GitHub automaticamente cria um **port forwarding** e disponibiliza uma URL pública para visualização.
 
@@ -422,5 +390,5 @@ npm run start
 ---
 
 <div align="center">
-  <sub>Feito com ❤️ para fins didáticos — <a href="https://github.com/infoweb-pos">infoweb-pos</a></sub>
+  <sub>Feito pelo copilot e revisado pelo professor com ❤️ para fins didáticos para <a href="https://github.com/infoweb-pos">infoweb-pos</a></sub>
 </div>
