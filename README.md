@@ -1,6 +1,10 @@
-# react-01-criar_aplicativo
+# POS 2026 - React - 01 - Criar aplicativo
 
-> **Notas de aula** — Tutorial passo a passo sobre como criar um aplicativo web (frontend) React com [Next.js](https://nextjs.org/) usando [GitHub](https://github.com) e [GitHub Codespaces](https://github.com/features/codespaces).
+## Informações gerais
+
+- **Público alvo**: alunos da disciplina de POS (Programação Orientada a Serviços) do curso de Infoweb da [DIATINF](https://diatinf.ifrn.edu.br/) no [CNAT-IFRN](https://portal.ifrn.edu.br/campus/natalcentral/)
+- **Professor**: [L A Minora](https://github.com/leonardo-minora/)
+- **Objetivo**: criar projeto de um frontend em react usando o nextjs
 
 ---
 
