@@ -93,7 +93,7 @@ npx create-next-app@latest .
 > O `.` indica que o app será criado na raiz do repositório atual.
 
 
-### 4.2 Opções de configuração
+### 4.2 Respondendo as perguntas do `create-next-app`
 
 O assistente interativo fará uma série de perguntas. Responda conforme abaixo:
 
@@ -174,36 +174,44 @@ Aguarde a instalação das dependências. Ao final, você verá:
 
 ---
 
-## 5. Biome
+## 5. Executando o projeto
 
-O [Biome](https://biomejs.dev/) é uma ferramenta de **lint e formatação** para JavaScript/TypeScript extremamente rápida, escrita em Rust.
-Ele substitui ESLint + Prettier com uma única dependência.
-
-O biome já vem instalado e configurado para nosso projeto.
-Para detalhes sobre a configuração do biome, ver o arquivo `biome.json` na raiz do projeto e consultar o docs no site do projeto.
-
-O biome também já esta pronto para ser executado via linha de comando:
-- `npm run check` : Executa a formatação, linter e ordenação das importações.
-- `npm run lint` : Executa verificações nos códigos-fontes.
-- `npm run format` : Executa a formatação dos códigos-fonte.
-
----
-
-## 6. Configurar o React Compiler
-
-O [React Compiler](https://react.dev/learn/react-compiler) (anteriormente chamado de "React Forget") é uma ferramenta experimental que **otimiza automaticamente** componentes React, eliminando a necessidade de `useMemo`, `useCallback` e `React.memo` na maioria dos casos.
-
-Para Verificar se o compilador está funcionando, execute o _build_:
+### Modo desenvolvimento
 
 ```bash
-npm run build
+npm run dev
 ```
 
-> 📘 **Referência:** [React Compiler — documentação oficial](https://react.dev/learn/react-compiler)
+> A saída esperada será como terminal abaixo.
+
+```bash
+> meu_app-front@0.1.0 dev
+> next dev
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://10.0.11.47:3000
+
+✓ Starting...
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+✓ Ready in 1010ms
+```
+
+Apesar do Next/React abrir a porta 3000 com o endereço `localhost:3000`, lembre que você esta no code space que é uma máquina virtual num servidor na infraestrutura do github.
+O code space verifica que você abriu uma porta no computador virtual e pergunta se você deseja abrir o endereço no navegador.
+Responda que `abrir no navegador` e ele deverá abrir uma nova aba com um endereço estranho, no meu computador / repositório no momento deste tutorial foi o endereço `https://ideal-xylophone-pj7jp57rvrh75-3000.app.github.dev/`.
+
+> 💡 No Codespace, ao iniciar o servidor de desenvolvimento, o GitHub automaticamente cria um **port forwarding** e disponibiliza uma URL pública para visualização.
 
 ---
 
-## 7. Estrutura de diretórios do projeto
+## 6. Entendendo o projeto
+
+### Estrutura de diretórios do projeto
 
 Após seguir todos os passos, a estrutura do seu projeto será semelhante a esta:
 
@@ -294,40 +302,102 @@ import { Button } from "../../../components/ui/Button"
 import { Button } from "@/components/ui/Button"
 ```
 
+### Modificando a página inicial
+
+Aos curiosos, as modificações podem ser realizadas inicialmente no arquivo `/src/app/page.tsx`.
+Arquivos `.ts` são arquivos Typescript enquanto `.tsx` são arquivos React com Typescript.
+
+De uma forma geral, e resumida ao extremo do extremo, arquivos `.tsx` devem conter componentes (que podem ser usado externamente ou não) React, sendo obrigatório pelo menos 1.
+
+Componentes React são tem como valor de saída um JSX, sintaxe extendida do HTML.
+Para maiores informações sobre JSX, ou aguarda o momento na sala ou dá uma olhada em [Writing markup with JSX](https://react.dev/learn/writing-markup-with-jsx) ou pergunta ao assistente(s) IA de sua preferência.
+
+Se já for usar [tailwind css](https://tailwindcss.com/), pode começar com o [Styling with utility classes](https://tailwindcss.com/docs/styling-with-utility-classes) ou pedir sugestão ao(s) assistente(s) IA.
+Lembre de instalar a extensão no code space `Tailwind CSS IntelliSense`. Ela ajudará no auto completar.
+
 ---
 
-## 8. Executar o projeto
+## 7. Publicando o projeto no repositório (push)
 
-### Modo desenvolvimento
 
-```bash
-npm run dev
+### Configure o .gitignore
+
+> Adicione o package-lock.json em .gitignore
+> Abaixo esta somente o início do arquivo .gitignore
+
+
+```git
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+package-lock.json
+
 ```
 
-> A saída esperada será como terminal abaixo.
+### Marque e guardar os arquivos no repositório, e publicar no github
 
-```bash
-> meu_app-front@0.1.0 dev
-> next dev
-
-▲ Next.js 16.1.6 (Turbopack)
-- Local:         http://localhost:3000
-- Network:       http://10.0.11.47:3000
-
-✓ Starting...
-Attention: Next.js now collects completely anonymous telemetry regarding usage.
-This information is used to shape Next.js' roadmap and prioritize features.
-You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
-https://nextjs.org/telemetry
-
-✓ Ready in 1010ms
+```terminal
+codespace:/workspaces/meu_app-front> git add .
+codespace:/workspaces/meu_app-front> git commit -m "adicionado aplicação inicial"
+[main 91a6483] adicionado aplicação inicial
+ 16 files changed, 321 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 README.md
+ create mode 100644 biome.json
+ create mode 100644 next.config.ts
+ create mode 100644 package.json
+ create mode 100644 postcss.config.mjs
+ create mode 100644 public/file.svg
+ create mode 100644 public/globe.svg
+ create mode 100644 public/next.svg
+ create mode 100644 public/vercel.svg
+ create mode 100644 public/window.svg
+ create mode 100644 src/app/favicon.ico
+ create mode 100644 src/app/globals.css
+ create mode 100644 src/app/layout.tsx
+ create mode 100644 src/app/page.tsx
+ create mode 100644 tsconfig.json
+codespace:/workspaces/meu_app-front> git push
+Enumerating objects: 22, done.
+Counting objects: 100% (22/22), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (20/20), done.
+Writing objects: 100% (21/21), 15.30 KiB | 3.83 MiB/s, done.
+Total 21 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/leonardo-minora/meu_app-front
+   2847cfd..91a6483  main -> main
+codespace:/workspaces/meu_app-front> 
 ```
 
-Apesar do Next/React abrir a porta 3000 com o endereço `localhost:3000`, lembre que você esta no code space que é uma máquina virtual num servidor na infraestrutura do github.
-O code space verifica que você abriu uma porta no computador virtual e pergunta se você deseja abrir o endereço no navegador.
-Responda que `abrir no navegador` e ele deverá abrir uma nova aba com um endereço estranho, no meu computador / repositório no momento deste tutorial foi o endereço `https://ideal-xylophone-pj7jp57rvrh75-3000.app.github.dev/`.
+---
 
-> 💡 No Codespace, ao iniciar o servidor de desenvolvimento, o GitHub automaticamente cria um **port forwarding** e disponibiliza uma URL pública para visualização.
+## 8. Outras informações
+
+### Biome
+
+O [Biome](https://biomejs.dev/) é uma ferramenta de **lint e formatação** para JavaScript/TypeScript extremamente rápida, escrita em Rust.
+Ele substitui ESLint + Prettier com uma única dependência.
+
+O biome já vem instalado e configurado para nosso projeto.
+Para detalhes sobre a configuração do biome, ver o arquivo `biome.json` na raiz do projeto e consultar o docs no site do projeto.
+
+O biome também já esta pronto para ser executado via linha de comando:
+- `npm run check` : Executa a formatação, linter e ordenação das importações.
+- `npm run lint` : Executa verificações nos códigos-fontes.
+- `npm run format` : Executa a formatação dos códigos-fonte.
+
+---
+
+### React Compiler
+
+O [React Compiler](https://react.dev/learn/react-compiler) (anteriormente chamado de "React Forget") é uma ferramenta experimental que **otimiza automaticamente** componentes React, eliminando a necessidade de `useMemo`, `useCallback` e `React.memo` na maioria dos casos.
+
+Para Verificar se o compilador está funcionando, execute o _build_:
+
+```bash
+npm run build
+```
+
+> 📘 **Referência:** [React Compiler — documentação oficial](https://react.dev/learn/react-compiler)
+
 
 ### Verificar lint e formatação
 
